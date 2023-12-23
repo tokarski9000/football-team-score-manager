@@ -1,9 +1,12 @@
-import { Link } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 
 export default function Header({auth}) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { post } = useForm();
 
-    });
+    const logout = (e) => {
+        e.preventDefault();
+        post(route('logout'))
+    }
     return (           
     <div>
         <nav>
@@ -14,13 +17,12 @@ export default function Header({auth}) {
             {auth.user ? 
             (
                 <li>
-                    <Link href={route('dashboard')}>Dashboard</Link>
+                    <Link href={route('dashboard')} onClick={logout}>Logout</Link>
                 </li>
              )
             :
             (<>
                 <li><Link href={route('login')}>Log in</Link></li>
-                <li><Link href={route('register')} role="button">Register</Link></li>        
             </>)
             }
         </ul>
