@@ -35,4 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/games', [App\Http\Controllers\GameController::class, 'index'])->name('games.index');
+
 require __DIR__.'/auth.php';

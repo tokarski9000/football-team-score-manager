@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Game extends Model
 {
@@ -23,8 +24,26 @@ class Game extends Model
     /**
      * The users that belong to the role.
      */
-    public function players(): BelongsToMany
+    public function playerGames(): HasMany
     {
-        return $this->belongsToMany(Player::class);
+        return $this->hasMany(PlayerGame::class);
     }
+
+    public function players()
+    {
+        return $this->hasManyThrough(
+            Player::class,
+            PlayerGame::class,
+            'game_id',
+            'id',
+            'id',
+            'player_id'
+        );
+    }
+
+    public function goals()
+    {
+        return $this->hasManyThrough(Goal::class, Player::class);
+    }
+
 }
