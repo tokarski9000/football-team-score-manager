@@ -44,4 +44,9 @@ class Game extends Model
     {
         return $this->hasManyThrough(Goal::class, Player::class);
     }
+
+    public function teams()
+    {
+        return $this->hasManyThrough(Team::class, PlayerGame::class, 'game_id', 'id', 'id', 'team_id')->distinct();
+    }
 }

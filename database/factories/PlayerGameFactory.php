@@ -19,6 +19,7 @@ class PlayerGameFactory extends Factory
         return [
             'player_id' => fake()->numberBetween(1, 12), // TODO: change to PlayerFactory::new(),
             'game_id' => fake()->numberBetween(1, 10), // TODO: change to GameFactory::new(
+            'team_id' => fake()->numberBetween(1, 2),
         ];
     }
 }

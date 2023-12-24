@@ -7,6 +7,7 @@ use App\Models\Game;
 use App\Models\Goal;
 use App\Models\Player;
 use App\Models\PlayerGame;
+use App\Models\Team;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +24,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.pl',
             'password' => '123',
         ]);
+        Team::factory()
+            ->count(2)
+            ->create();
         Player::factory()
             ->count(12)
             ->create();
@@ -38,6 +42,7 @@ class DatabaseSeeder extends Seeder
                     [
                         'game_id' => $i + 1,
                         'player_id' => $j + 1,
+                        'team_id' => $j < 6 ? 1 : 2,
                     ]
                 );
             }

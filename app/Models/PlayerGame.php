@@ -13,7 +13,7 @@ class PlayerGame extends Model
     protected $fillable = [
         'player_id',
         'game_id',
-        'goals',
+        'team',
     ];
 
     public function player(): BelongsTo
