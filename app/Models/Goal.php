@@ -13,6 +13,7 @@ class Goal extends Model
         'player_id',
         'game_id',
     ];
+
     public function player()
     {
         return $this->belongsTo(Player::class);

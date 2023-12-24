@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@admin.pl',
-            'password' => '123'
+            'password' => '123',
         ]);
         Player::factory()
             ->count(12)
@@ -32,12 +32,12 @@ class DatabaseSeeder extends Seeder
         Goal::factory()
             ->count(20)
             ->create();
-        for($i = 0; $i < 10; $i++) {
-            for($j = 0; $j < 12; $j++) {
+        for ($i = 0; $i < 10; $i++) {
+            for ($j = 0; $j < 12; $j++) {
                 PlayerGame::factory()->create(
                     [
-                        'game_id' => $i+1,
-                        'player_id' => $j+1,
+                        'game_id' => $i + 1,
+                        'player_id' => $j + 1,
                     ]
                 );
             }
