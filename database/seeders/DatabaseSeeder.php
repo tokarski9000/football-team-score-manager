@@ -28,13 +28,13 @@ class DatabaseSeeder extends Seeder
             ->count(2)
             ->create();
         Player::factory()
-            ->count(12)
+            ->count(40)
             ->create();
         Game::factory()
             ->count(10)
             ->create();
         Goal::factory()
-            ->count(20)
+            ->count(10)
             ->create();
         for ($i = 0; $i < 10; $i++) {
             for ($j = 0; $j < 12; $j++) {

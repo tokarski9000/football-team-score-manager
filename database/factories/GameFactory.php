@@ -19,6 +19,7 @@ class GameFactory extends Factory
         return [
             'date' => fake()->date(),
             'place' => fake()->city(),
+            'is_finished' => fake()->boolean(),
         ];
     }
 }

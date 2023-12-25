@@ -18,6 +18,7 @@ class Game extends Model
     protected $fillable = [
         'date',
         'place',
+        'finished',
     ];
 
     /**
@@ -42,11 +43,18 @@ class Game extends Model
 
     public function goals()
     {
-        return $this->hasManyThrough(Goal::class, Player::class);
+        return $this->hasMany(Goal::class);
     }
 
     public function teams()
     {
-        return $this->hasManyThrough(Team::class, PlayerGame::class, 'game_id', 'id', 'id', 'team_id')->distinct();
+        return $this->hasManyThrough(
+            Team::class,
+            PlayerGame::class,
+            'game_id',
+            'id',
+            'id',
+            'team_id'
+        )->distinct();
     }
 }

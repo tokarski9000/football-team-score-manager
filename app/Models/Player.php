@@ -33,9 +33,4 @@ class Player extends Model
     {
         return $this->hasMany(Goal::class);
     }
-
-    public function team()
-    {
-        return $this->hasOneThrough(Team::class, PlayerGame::class, 'player_id', 'id', 'id', 'team_id');
-    }
 }

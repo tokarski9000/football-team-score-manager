@@ -13,10 +13,10 @@ class PlayerGame extends Model
     protected $fillable = [
         'player_id',
         'game_id',
-        'team',
+        'team_id',
     ];
 
-    public function player(): BelongsTo
+    public function player()
     {
         return $this->belongsTo(Player::class);
     }

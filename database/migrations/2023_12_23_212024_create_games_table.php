@@ -16,6 +16,7 @@ return new class() extends Migration
             $table->timestamps();
             $table->date('date');
             $table->string('place');
+            $table->boolean('is_finished')->default(false);
         });
     }
 

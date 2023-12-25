@@ -1,6 +1,7 @@
 import { Link, Head } from '@inertiajs/react';
 import Layout from '@/Layouts/Layout';
-
+import React from "react";
+import Game from "@/Components/Game/Game.jsx";
 export default function Welcome({ auth, games }) {
     console.log(games)
 
@@ -9,30 +10,7 @@ export default function Welcome({ auth, games }) {
             <Head title="Welcome" />
             <div className={`container`}>
                 { games.map((game, gameIndex) => (
-                    <details>
-                        <summary>{game.date} - {game.place}</summary>
-                        <table>
-                            <thead>
-                                <tr>
-                                    {
-                                        game.teams.map((team) => (
-                                            <th>{team.name}</th>
-                                        ))
-                                    }
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {
-                                games[gameIndex].teams[0].map((player, playerIndex) => (
-                                    <tr>
-                                        <td>{player.first_name}</td>
-                                    </tr>
-                                ))
-                            }
-                            </tbody>
-                        </table>
-
-                    </details>
+                    <Game key={gameIndex} game={game} />
                 ))}
             </div>
         </Layout>

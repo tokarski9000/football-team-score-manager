@@ -16,7 +16,7 @@ return new class() extends Migration
             $table->timestamps();
             $table->foreignId('player_id')->constrained();
             $table->foreignId('game_id')->constrained();
-            $table->foreignId('team_id')->constrained();
+            $table->foreignId('team_id')->nullable()->constrained();
         });
     }
 
