@@ -1,5 +1,6 @@
 import React from "react";
 import styles from './Game.module.scss';
+import {Link} from "@inertiajs/react";
 export default function Game({ game }) {
     const team1 = game.players.filter(player => player.team_id === 1);
     const team2 = game.players.filter(player => player.team_id === 2);
@@ -15,7 +16,7 @@ export default function Game({ game }) {
                 }
                 <h3>{game.place}</h3>
                 <small>{game.date}</small>
-                <button><Link href={route('edit')}>Edit</Link></button>
+                <button><Link href={`#`}>Edit</Link></button>
             </summary>
             {
                 noTeam.length > 0 &&
