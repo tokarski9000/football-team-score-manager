@@ -71,7 +71,7 @@ export default function index({ auth, players }) {
                                     onChange={playerHandler}
                                     aria-invalid={errors.date ? true : null}
                                 />
-                                {player.first_name}
+                                {player.first_name} {player.last_name}
                             </label>
                     )}
                     <button type="submit">Create</button>

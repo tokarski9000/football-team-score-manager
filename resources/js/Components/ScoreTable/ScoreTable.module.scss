@@ -1,0 +1,11 @@
+.ScoreTable {
+    svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .Player {
+        height: 70px !important;
+        --bs-border-color: #4b5563;
+    }
+}

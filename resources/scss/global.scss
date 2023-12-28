@@ -26,3 +26,24 @@ $grid-breakpoints: (
 @import "bootstrap/scss/mixins/grid";
 @import "bootstrap/scss/vendor/rfs";
 @import "bootstrap/scss/grid";
+@import "bootstrap/scss/utilities";
+$utilities: map-merge(
+        $utilities,
+        (
+            "width": map-merge(
+                    map-get($utilities, "width"),
+                    (
+                        values: map-merge(
+                                map-get(map-get($utilities, "width"), "values"),
+                                (10: 10%),
+                        ),
+                    ),
+            ),
+        )
+);
+
+@import "bootstrap/scss/utilities/api";
+
+.row {
+    --bs-gutter-x: 0;
+}
