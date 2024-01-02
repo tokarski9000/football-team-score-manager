@@ -4,7 +4,7 @@ import InputError from "@/Elements/InputError/InputError.jsx";
 import {useEffect, useState} from "react";
 import styles from './Game.module.scss';
 
-export default function index({ auth, players }) {
+export default function create({ auth, players }) {
     const [playersArray, setPlayersArray] = useState([]);
     const { data, setData, post, processing, errors, reset } = useForm({
         place:"",
@@ -59,7 +59,9 @@ export default function index({ auth, players }) {
                             onChange={(e) => setData('date', e.target.value)}
                             aria-invalid={errors.date ? true : null}
                             />
+                        <InputError>{errors.date}</InputError>
                     </label>
+
                     { players.map((player, index) => <label className={styles.Player} key={index}>
                                 <input
                                     id={`player-${index}`}
@@ -69,11 +71,13 @@ export default function index({ auth, players }) {
                                     placeholder='Date'
                                     autoComplete="date"
                                     onChange={playerHandler}
-                                    aria-invalid={errors.date ? true : null}
+                                    aria-invalid={errors.players ? true : null}
                                 />
                                 {player.first_name} {player.last_name}
                             </label>
                     )}
+                    <InputError>{errors.players}</InputError>
+
                     <button type="submit">Create</button>
                 </form>
             }

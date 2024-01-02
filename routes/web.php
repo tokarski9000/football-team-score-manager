@@ -29,7 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/game', [GameController::class, 'createPage'])->middleware(['auth', 'verified'])->name('game');
+Route::get('/game', [GameController::class, 'createForm'])->middleware(['auth', 'verified'])->name('game.create');
+Route::get('/game/{id}', [GameController::class, 'show'])->middleware(['auth', 'verified'])->name('game.show');
 Route::post('/game', [GameController::class, 'create'])
     ->middleware(['auth', 'verified'])->name('game.create');
 

@@ -17,6 +17,12 @@ class GameController extends Controller
 
     public function create(Request $request)
     {
+        $validate = $request->validate([
+            'date' => 'required',
+            'place' => 'required',
+            'players' => ['required', 'min:2']
+        ]);
+
         $game = $this->game->create([
             'date' => $request->date,
             'place' => $request->place,
@@ -31,14 +37,14 @@ class GameController extends Controller
             ]);
         }
 
-        return redirect()->route('home');
+        return redirect()->route('game.show', ['id' => '1']);
     }
 
-    public function createPage()
+    public function createForm()
     {
         $players = $this->player->get();
 
-        return Inertia::render('Game/index',
+        return Inertia::render('Game/create',
             [
                 'players' => $players,
             ]);
@@ -49,31 +55,7 @@ class GameController extends Controller
         $games = $this->game->with('playerGames.player', 'goals', 'teams')->orderByDesc('id')->get();
         // Map necessary information to the games.
         foreach ($games as $game) {
-
-            $players = array_map(function ($playerGame) {
-                $player = $playerGame['player'];
-                $player['team_id'] = $playerGame['team_id'];
-
-                return $player;
-            }, $game->playerGames->toArray());
-
-            $score = [];
-
-            // Calculate goals.
-            foreach ($players as $i => $player) {
-                // Set default values.
-                $players[$i]['goals'] = $players[$i]['goals'] ?? 0;
-                $score[$player['team_id']] = $score[$player['team_id']] ?? 0;
-
-                foreach ($game->goals as $goal) {
-                    if ($player['id'] === $goal->player_id) {
-                        $players[$i]['goals']++;
-                        $score[$player['team_id']] = isset($score[$player['team_id']]) ? $score[$player['team_id']] + 1 : 1;
-                    }
-                }
-            }
-            $game->score = $score;
-            $game->players = $players;
+            $game = self::getPlayers($game);
         }
 
         return Inertia::render('Welcome', [
@@ -81,5 +63,55 @@ class GameController extends Controller
             'canRegister' => Route::has('register'),
             'games' => $games,
         ]);
+    }
+
+    public function show($id) {
+
+        $game = $this->game->with('playerGames.player', 'goals', 'teams')->where('id', $id)->first();
+
+        if ($game) {
+            $game = self::getPlayers($game);
+        }
+
+        return Inertia::render('Game/show',
+            [
+                'game' => $game,
+            ]);
+    }
+
+    public function delete($id) {
+        $this->game->delete($id);
+
+        return redirect()->route('home');
+    }
+
+    private function getPlayers($game) {
+
+        $players = array_map(function ($playerGame) {
+            $player = $playerGame['player'];
+            $player['team_id'] = $playerGame['team_id'];
+
+            return $player;
+        }, $game->playerGames->toArray());
+
+        $score = [];
+
+        // Calculate goals.
+        foreach ($players as $i => $player) {
+            // Set default values.
+            $players[$i]['goals'] = $players[$i]['goals'] ?? 0;
+            $score[$player['team_id']] = $score[$player['team_id']] ?? 0;
+
+            foreach ($game->goals as $goal) {
+                if ($player['id'] === $goal->player_id) {
+                    $players[$i]['goals']++;
+                    $score[$player['team_id']] = isset($score[$player['team_id']]) ? $score[$player['team_id']] + 1 : 1;
+                }
+            }
+        }
+        $game->score = $score;
+        $game->players = $players;
+
+        return $game;
     }
 }
