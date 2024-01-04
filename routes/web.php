@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GameController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -33,5 +33,8 @@ Route::get('/game', [GameController::class, 'createForm'])->middleware(['auth', 
 Route::get('/game/{id}', [GameController::class, 'show'])->middleware(['auth', 'verified'])->name('game.show');
 Route::post('/game', [GameController::class, 'create'])
     ->middleware(['auth', 'verified'])->name('game.create');
+
+Route::get('/players', [PlayerController::class, 'index'])->middleware(['auth', 'verified'])->name('player.index');
+Route::post('/players', [PlayerController::class, 'create'])->middleware(['auth', 'verified'])->name('player.create');
 
 require __DIR__.'/auth.php';

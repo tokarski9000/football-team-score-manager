@@ -32,7 +32,8 @@ export default function create({ auth, players }) {
 
     return (
         <Layout auth={auth}>
-            <div className={`container`}>
+            <article>
+                <header>Create a game</header>
             { auth.user &&
                 <form onSubmit={submit}>
                     <label>
@@ -81,7 +82,7 @@ export default function create({ auth, players }) {
                     <button type="submit">Create</button>
                 </form>
             }
-            </div>
+            </article>
         </Layout>
     );
 }

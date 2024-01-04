@@ -18,6 +18,9 @@ export default function Header({auth}) {
             (
                 <>
                     <li>
+                        <Link href={route('player.index')}>Players</Link>
+                    </li>
+                    <li>
                         <Link href={route('game.create')}>Create Game</Link>
                     </li>
                     <li>
