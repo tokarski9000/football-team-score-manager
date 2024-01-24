@@ -31,8 +31,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/game', [GameController::class, 'createForm'])->middleware(['auth', 'verified'])->name('game.create');
 Route::get('/game/{id}', [GameController::class, 'show'])->middleware(['auth', 'verified'])->name('game.show');
-Route::post('/game', [GameController::class, 'create'])
-    ->middleware(['auth', 'verified'])->name('game.create');
+Route::post('/game', [GameController::class, 'create'])->middleware(['auth', 'verified'])->name('game.create');
+Route::post('/game/{id}', [GameController::class, 'delete'])->middleware(['auth', 'verified'])->name('game.delete');
 
 Route::get('/players', [PlayerController::class, 'index'])->middleware(['auth', 'verified'])->name('player.index');
 Route::post('/players', [PlayerController::class, 'create'])->middleware(['auth', 'verified'])->name('player.create');

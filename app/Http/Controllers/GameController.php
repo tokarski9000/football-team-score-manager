@@ -80,7 +80,7 @@ class GameController extends Controller
     }
 
     public function delete($id) {
-        $this->game->delete($id);
+        Game::find($id)->delete();
 
         return redirect()->route('home');
     }

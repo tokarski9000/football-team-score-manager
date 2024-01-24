@@ -1,13 +1,29 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from './Game.module.scss';
 import ScoreTable from "@/Components/ScoreTable/ScoreTable.jsx";
 import NoTeamList from "@/Components/NoTeamList/NoTeamList.jsx";
 import Modal from "@/Elements/Modal/Modal.jsx";
+import {useForm} from "@inertiajs/react";
 
 export default function Game({ game }) {
+    const [modalOpen, setModalOpen] = useState(false);
+
     const team1 = game.players.filter(player => player.team_id === 1);
     const team2 = game.players.filter(player => player.team_id === 2);
     const noTeam = game.players.filter(player => player.team_id === null);
+
+    const { data, setData, post, processing, errors, reset } = useForm();
+
+    const openModal = (e) => {
+        e.preventDefault();
+        setModalOpen((prev) => !prev);
+    }
+
+    const deleteGame = (e) => {
+        e.preventDefault();
+        post(route('game.delete', [game.id]));
+        setModalOpen(false);
+    }
 
     return (
         <article className={`${styles.Game} row`}>
@@ -37,9 +53,15 @@ export default function Game({ game }) {
                 <a href={route('game.show', [game.id])} className={'col-5 col-lg-2'}>
                     <button >Edit</button>
                 </a>
-                <button className={'bg-danger border-danger col-5 col-lg-2'}>Delete</button>
+                <button onClick={openModal} className={'bg-danger border-danger col-5 col-lg-2'}>Delete</button>
 
-                <Modal title={'Remove game'} open={false}>dsadasd</Modal>
+                <Modal title={'Remove game'} open={modalOpen} handleOpen={openModal}>
+                    <form onSubmit={deleteGame}>
+                        <button className={'w-100 bg-danger border-danger col-5 col-lg-2'}>Delete</button>
+                    </form>
+
+                </Modal>
+
             </div>
         </article>
     );

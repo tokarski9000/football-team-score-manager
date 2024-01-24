@@ -14,7 +14,7 @@ class PlayerController extends Controller
 
     public function index()
     {
-        $players = $this->player->orderBy('id', 'desc')->get();
+        $players = $this->player->with('goals', 'games')->orderBy('id', 'desc')->get();
 
         return Inertia::render('Player/index',
             [
