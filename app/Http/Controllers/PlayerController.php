@@ -16,6 +16,14 @@ class PlayerController extends Controller
     {
         $players = $this->player->with('goals', 'games')->orderBy('id', 'desc')->get();
 
+        // Calculate average goals per game for each player.
+        foreach ($players as $player) {
+            $games = $player->games->count();
+            $goals = $player->goals->count();
+            $avg_goals = $games > 0 ? $goals / $games : 0;
+            $player->avg_goals = $avg_goals;
+        }
+
         return Inertia::render('Player/index',
             [
                 'players' => $players,

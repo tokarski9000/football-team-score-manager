@@ -21,14 +21,14 @@ class GoalController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(Request $request, $id)
     {
         $this->goal->create([
             'player_id' => $request->player_id,
-            'game_id' => $request->game_id,
+            'game_id' => $id,
         ]);
 
-        return redirect()->route('game.show', ['id' => $request->game_id]);
+        return redirect()->route('game.show', ['id' => $id]);
     }
 
     /**
@@ -66,14 +66,14 @@ class GoalController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $id)
     {
         $goal = $this->goal->where([
             'player_id' => $request->player_id,
-            'game_id' => $request->game_id,
+            'game_id' => $id,
             ])->first();
         $goal->delete();
 
-        return redirect()->route('game.show', ['id' => $request->game_id]);
+        return redirect()->route('game.show', ['id' => $id]);
     }
 }

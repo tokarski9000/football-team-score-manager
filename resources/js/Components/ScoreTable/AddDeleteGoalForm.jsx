@@ -9,16 +9,14 @@ export default function AddDeleteGoalForm({player}) {
     const addGoal = (e, player_id) => {
         e.preventDefault();
         post(route(`goal.create`,[game.id, {
-            player_id: player_id,
-            game_id: game.id,
+            player_id: player_id
         }]));
     }
 
     const deleteGoal = (e, player_id) => {
         e.preventDefault();
         post(route('goal.destroy',[game.id, {
-            player_id: player_id,
-            game_id: game.id,
+            player_id: player_id
         }]));
     }
 

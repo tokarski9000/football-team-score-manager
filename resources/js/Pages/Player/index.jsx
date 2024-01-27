@@ -9,6 +9,8 @@ export default function Index({auth, players}) {
         nick_name:"",
     });
 
+    console.log(players)
+    players = players.sort((a, b) => b.avg_goals - a.avg_goals);
     const createPlayer = (e) => {
         e.preventDefault();
         post(route('player.create'), {
@@ -61,15 +63,16 @@ export default function Index({auth, players}) {
                         />
                         <InputError>{errors.nick_name}</InputError>
                     </label>
-                    <button type={"submit"}>Create player</button>
+                    <button type={"submit"}>Add player</button>
                 </form>
             </article>
             <article>
                 <header>Players</header>
                 <div className={'row mb-4'}>
                     <div className={'col-6 fw-bold'}>Name</div>
-                    <div className={'col-3 fw-bold'}>Goals</div>
-                    <div className={'col-3 fw-bold'}>Games</div>
+                    <div className={'col-2 fw-bold'}>Goals</div>
+                    <div className={'col-2 fw-bold'}>Games</div>
+                    <div className={'col-2 fw-bold'}>Avg Goals</div>
                 </div>
                 {
                     players && players.map((player, index) => (
@@ -77,11 +80,14 @@ export default function Index({auth, players}) {
                             <div className={'col-6'}>
                                 {player.first_name} {player.last_name}
                             </div>
-                            <div className={'col-3'}>
+                            <div className={'col-2'}>
                                 {player.goals.length}
                             </div>
-                            <div className={'col-3'}>
+                            <div className={'col-2'}>
                                 {player.games.length}
+                            </div>
+                            <div className={'col-2'}>
+                                {player.avg_goals.toFixed(2)}
                             </div>
                         </div>
                     ))

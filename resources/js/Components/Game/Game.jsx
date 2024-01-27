@@ -3,6 +3,7 @@ import styles from './Game.module.scss';
 import ScoreTable from "@/Components/ScoreTable/ScoreTable.jsx";
 import NoTeamList from "@/Components/NoTeamList/NoTeamList.jsx";
 import EditButtons from "@/Components/Game/EditButtons.jsx";
+import Modal from "@/Elements/Modal/Modal.jsx";
 
 export const GameContext = createContext({game: null });
 
@@ -36,9 +37,15 @@ export default function Game({ game }) {
                             <ScoreTable team={team2}/>
                         </div>
                     </div>
-                    <EditButtons game={game}/>
+                    <div
+                        className={'mt-5 row justify-content-center justify-content-lg-end gap-4'}>
+                        <a href={route('game.show', [game.id])}
+                           className={'col-5 col-lg-2'}>
+                            <button>Edit</button>
+                        </a>
+                    </div>
                 </div>
-           </article>
+            </article>
         </GameContext.Provider>
     );
 }

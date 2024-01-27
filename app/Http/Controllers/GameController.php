@@ -18,7 +18,7 @@ class GameController extends Controller
     public function create(Request $request)
     {
         $validate = $request->validate([
-            'date' => 'required',
+            'date' => ['required', 'date'],
             'place' => 'required',
             'players' => ['required', 'min:2']
         ]);

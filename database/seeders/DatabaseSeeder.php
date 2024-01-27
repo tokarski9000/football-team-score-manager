@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             ->count(2)
             ->create();
         Player::factory()
-            ->count(40)
+            ->count(12)
             ->create();
         Game::factory()
             ->count(10)
