@@ -5,22 +5,24 @@ import {AuthContext} from "@/Layouts/Layout.jsx";
 import {useContext} from "react";
 import AddDeleteGoalForm from "@/Components/ScoreTable/AddDeleteGoalForm.jsx";
 
-export default function ScoreTable({ team }) {
+export default function ScoreTableEdit({ team }) {
     const auth = useContext(AuthContext);
 
     return (
         <div className={`${style.ScoreTable}`}>
             <div className={`row border-bottom pb-2`}>
                 <h5 className={`col-7 m-0`}><PlayerIcon height={10} width={10} /> </h5>
-                <h5 className={`col-5 m-0 text-center`}><BallIcon height={10} width={10} /></h5>
+                <h5 className={`col-5 m-0`}><BallIcon height={10} width={10} /></h5>
             </div>
             <div className={`row`}>
             {
                 team.map((player, playerIndex) => (
                     <div key={playerIndex} className={`${style.Player} row border-bottom`}>
                         <div className={`d-flex justify-content-start align-items-center col-7`}>{player.first_name} {player.last_name}</div>
-                        <div className={`d-flex justify-content-center justify-content-sm-center align-items-center col-5`}>
-                            {player.goals}
+                        <div className={`d-flex justify-content-end justify-content-sm-center align-items-center col-5`}>
+                            {
+                                auth.user ? <AddDeleteGoalForm player={player} /> : <>{player.goals}</>
+                            }
                         </div>
                     </div>
                 ))

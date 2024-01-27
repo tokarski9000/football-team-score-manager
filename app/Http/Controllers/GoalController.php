@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class GoalController extends Controller
 {
+    public function __construct(protected Goal $goal)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
@@ -18,9 +21,14 @@ class GoalController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $this->goal->create([
+            'player_id' => $request->player_id,
+            'game_id' => $request->game_id,
+        ]);
+
+        return redirect()->route('game.show', ['id' => $request->game_id]);
     }
 
     /**
@@ -58,8 +66,14 @@ class GoalController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Goal $goal)
+    public function destroy(Request $request)
     {
-        //
+        $goal = $this->goal->where([
+            'player_id' => $request->player_id,
+            'game_id' => $request->game_id,
+            ])->first();
+        $goal->delete();
+
+        return redirect()->route('game.show', ['id' => $request->game_id]);
     }
 }

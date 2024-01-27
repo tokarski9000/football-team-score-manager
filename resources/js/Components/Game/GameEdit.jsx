@@ -1,19 +1,19 @@
 import React, {createContext} from "react";
 import styles from './Game.module.scss';
-import ScoreTable from "@/Components/ScoreTable/ScoreTable.jsx";
 import NoTeamList from "@/Components/NoTeamList/NoTeamList.jsx";
 import EditButtons from "@/Components/Game/EditButtons.jsx";
+import ScoreTableEdit from "@/Components/ScoreTable/ScoreTableEdit.jsx";
 
-export const GameContext = createContext({game: null });
+export const GameEditContext = createContext({game: null });
 
-export default function Game({ game }) {
+export default function GameEdit({ game }) {
 
     const team1 = game.players.filter(player => player.team_id === 1);
     const team2 = game.players.filter(player => player.team_id === 2);
     const noTeam = game.players.filter(player => player.team_id === null);
 
     return (
-        <GameContext.Provider value={game}>
+        <GameEditContext.Provider value={game}>
             <article className={`${styles.Game} row`}>
                 <div className={'col-12 col-lg-3 mb-3 text-center text-lg-start'}>
                     <a href={route('game.show', [game.id])}>
@@ -29,16 +29,16 @@ export default function Game({ game }) {
                                 <NoTeamList players={noTeam}/>
                             </div>
                         )}
-                        <div className={`col-6`}>
-                            <ScoreTable team={team1}/>
+                        <div className={`col-12 col-lg-6`}>
+                            <ScoreTableEdit team={team1}/>
                         </div>
-                        <div className={`col-6`}>
-                            <ScoreTable team={team2}/>
+                        <div className={`col-12 col-lg-6`}>
+                            <ScoreTableEdit team={team2}/>
                         </div>
                     </div>
                     <EditButtons game={game}/>
                 </div>
            </article>
-        </GameContext.Provider>
+        </GameEditContext.Provider>
     );
 }

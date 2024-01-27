@@ -1,4 +1,4 @@
-import { Link, Head } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import Layout from '@/Layouts/Layout';
 import React from "react";
 import Game from "@/Components/Game/Game.jsx";

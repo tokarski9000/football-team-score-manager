@@ -3,9 +3,10 @@
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\PlayerGameController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use App\Http\Controllers\GoalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +34,11 @@ Route::get('/game', [GameController::class, 'createForm'])->middleware(['auth', 
 Route::get('/game/{id}', [GameController::class, 'show'])->middleware(['auth', 'verified'])->name('game.show');
 Route::post('/game', [GameController::class, 'create'])->middleware(['auth', 'verified'])->name('game.create');
 Route::post('/game/{id}', [GameController::class, 'delete'])->middleware(['auth', 'verified'])->name('game.delete');
+
+Route::post('/game/{id}/deleteGoal',[GoalController::class, 'destroy'])->middleware(['auth', 'verified'])->name('goal.destroy');
+Route::post('/game/{id}/addGoal',[GoalController::class, 'create'])->middleware(['auth', 'verified'])->name('goal.create');
+
+Route::post('/game/{id}/createTeam', [PlayerGameController::class, 'create'])->middleware(['auth', 'verified'])->name('playerGame.create');
 
 Route::get('/players', [PlayerController::class, 'index'])->middleware(['auth', 'verified'])->name('player.index');
 Route::post('/players', [PlayerController::class, 'create'])->middleware(['auth', 'verified'])->name('player.create');

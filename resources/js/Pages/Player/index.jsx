@@ -9,7 +9,6 @@ export default function Index({auth, players}) {
         nick_name:"",
     });
 
-    console.log(players)
     const createPlayer = (e) => {
         e.preventDefault();
         post(route('player.create'), {
@@ -67,15 +66,15 @@ export default function Index({auth, players}) {
             </article>
             <article>
                 <header>Players</header>
-                <div className={'row'}>
-                    <div
-                        className={'col-3'}>Name</div>
-                    <div className={'col-3'}>Goals</div>
+                <div className={'row mb-4'}>
+                    <div className={'col-6 fw-bold'}>Name</div>
+                    <div className={'col-3 fw-bold'}>Goals</div>
+                    <div className={'col-3 fw-bold'}>Games</div>
                 </div>
                 {
                     players && players.map((player, index) => (
-                        <div key={index} className={'row'}>
-                            <div className={'col-3'}>
+                        <div key={index} className={'row mb-4'}>
+                            <div className={'col-6'}>
                                 {player.first_name} {player.last_name}
                             </div>
                             <div className={'col-3'}>
@@ -87,7 +86,6 @@ export default function Index({auth, players}) {
                         </div>
                     ))
                 }
-
             </article>
         </Layout>
     )

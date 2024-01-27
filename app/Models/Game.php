@@ -57,4 +57,11 @@ class Game extends Model
             'team_id'
         )->distinct();
     }
+
+    public function delete() {
+        $this->playerGames()->delete();
+        $this->goals()->delete();
+
+        return parent::delete();
+    }
 }
