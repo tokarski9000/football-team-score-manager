@@ -38,6 +38,7 @@ export default function EditButtons({ game }) {
                     <button onClick={openModal}
                             className={'bg-danger border-danger'}>Delete game
                     </button>
+                    <a href={route('game.edit', game.id)}>Edit</a>
                     <Modal title={'Remove game'} open={modalOpen}
                            handleOpen={openModal}>
                         <p className={'mb-5'}>Are you sure you want to delete this game?</p>

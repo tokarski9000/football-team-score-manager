@@ -34,6 +34,8 @@ Route::get('/game', [GameController::class, 'createForm'])->middleware(['auth', 
 Route::get('/game/{id}', [GameController::class, 'show'])->middleware(['auth', 'verified'])->name('game.show');
 Route::post('/game', [GameController::class, 'create'])->middleware(['auth', 'verified'])->name('game.create');
 Route::post('/game/{id}', [GameController::class, 'delete'])->middleware(['auth', 'verified'])->name('game.delete');
+Route::get('/game/{id}/editGame', [GameController::class, 'editGameForm'])->middleware(['auth', 'verified'])->name('game.edit');
+Route::patch('/game/{id}/editGame', [GameController::class, 'editGame'])->middleware(['auth', 'verified'])->name('game.edit');
 
 Route::post('/game/{id}/deleteGoal',[GoalController::class, 'destroy'])->middleware(['auth', 'verified'])->name('goal.destroy');
 Route::post('/game/{id}/addGoal',[GoalController::class, 'create'])->middleware(['auth', 'verified'])->name('goal.create');
@@ -43,5 +45,8 @@ Route::patch('/game/{id}/resetTeam', [PlayerGameController::class, 'reset'])->mi
 
 Route::get('/players', [PlayerController::class, 'index'])->middleware(['auth', 'verified'])->name('player.index');
 Route::post('/players', [PlayerController::class, 'create'])->middleware(['auth', 'verified'])->name('player.create');
+Route::get('/player/{id}', [PlayerController::class, 'show'])->middleware(['auth', 'verified'])->name('player.show');
+Route::patch('/player/{id}', [PlayerController::class, 'update'])->middleware(['auth', 'verified'])->name('player.update');
+
 
 require __DIR__.'/auth.php';

@@ -12,7 +12,7 @@ export default function ScoreTableEdit({ team }) {
         <div className={`${style.ScoreTable}`}>
             <div className={`row border-bottom pb-2`}>
                 <h5 className={`col-7 m-0`}><PlayerIcon height={10} width={10} /> </h5>
-                <h5 className={`col-5 m-0`}><BallIcon height={10} width={10} /></h5>
+                <h5 className={`col-5 m-0 text-center`}><BallIcon height={10} width={10} /></h5>
             </div>
             <div className={`row`}>
             {

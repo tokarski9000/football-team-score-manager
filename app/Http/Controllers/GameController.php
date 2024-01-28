@@ -28,7 +28,6 @@ class GameController extends Controller
             'place' => $request->place,
         ]);
 
-
         foreach ($request->players as $player) {
             $this->playerGame->create([
                 'player_id' => $player,
@@ -83,6 +82,48 @@ class GameController extends Controller
         Game::find($id)->delete();
 
         return redirect()->route('home');
+    }
+
+    public function editGameForm($id) {
+
+        return Inertia::render('Game/edit', [
+            'game' => $this->game->where('id', $id)->first(),
+            'players' => $this->player->get()
+        ]);
+    }
+
+    public function editGame(Request $request, $id) {
+        $validate = $request->validate([
+            'players' => ['required', 'min:2']
+        ]);
+
+        // Get players ids from request.
+        $playersIds = [];
+        foreach ($request->players as $player_id) {
+            $playersIds[] = $player_id;
+        }
+
+        // Remove players that are not in the request and get the players that are in the request but not in the database.
+        $playerGames = $this->playerGame->where('game_id', $id)->get();
+        $playerGames_player_ids = [];
+        foreach ($playerGames as $playerGame) {
+            $playerGames_player_ids[] = $playerGame->player_id;
+            if (!in_array($playerGame->player_id, $playersIds)) {
+                $this->playerGame->where('id', $playerGame->id)->delete();
+            }
+        }
+
+        // Add players that are in the request, but not in the database.
+        $newPlayers = array_diff($playersIds, $playerGames_player_ids);
+        foreach ($newPlayers as $newPlayer) {
+            $this->playerGame->create([
+                'player_id' => $newPlayer,
+                'game_id' => $id,
+                'team_id' => null
+            ]);
+        }
+
+        return $this->show($id);
     }
 
     private function getPlayers($game) {

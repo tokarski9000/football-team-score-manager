@@ -1,28 +1,25 @@
 import Layout from "@/Layouts/Layout.jsx";
+import {useState} from "react";
 import {useForm} from "@inertiajs/react";
 import InputError from "@/Elements/InputError/InputError.jsx";
 
-export default function Index({auth, players}) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        first_name:"",
-        last_name:"",
-        nick_name:"",
+export default function Show({auth, player, games}) {
+    const { data, setData, patch, processing, errors, reset } = useForm({
+        first_name: player.first_name,
+        last_name: player.last_name,
+        nick_name: player.nick_name,
     });
 
-    players = players.sort((a, b) => b.avg_goals - a.avg_goals);
-    const createPlayer = (e) => {
+    const updatePlayer = (e) => {
         e.preventDefault();
-        post(route('player.create'), {
-            onSuccess: () => reset('nick_name', 'last_name', 'first_name')
-        });
+        patch(route('player.update', [player.id]));
     }
 
     return (
         <Layout auth={auth}>
-
             <article>
-                <header> Create a player.</header>
-                <form onSubmit={createPlayer}>
+                <header>{player.first_name} {player.last_name}</header>
+                <form onSubmit={updatePlayer}>
                     <label>
                         <input
                             id="first_name"
@@ -62,35 +59,19 @@ export default function Index({auth, players}) {
                         />
                         <InputError>{errors.nick_name}</InputError>
                     </label>
-                    <button type={"submit"}>Add player</button>
+                    <button type="submit" className={`btn btn-primary`} disabled={processing}>Update Player</button>
                 </form>
-            </article>
-            <article>
-                <header>Players</header>
-                <div className={'row mb-4'}>
-                    <div className={'col-6 fw-bold'}>Name</div>
-                    <div className={'col-2 fw-bold'}>Goals</div>
-                    <div className={'col-2 fw-bold'}>Games</div>
-                    <div className={'col-2 fw-bold'}>Avg Goals</div>
-                </div>
-                {
-                    players && players.map((player, index) => (
-                        <div key={index} className={'row mb-4'}>
-                            <div className={'col-6'}>
-                                <a href={`/player/${player.id}`}>{player.first_name} {player.last_name}</a>
-                            </div>
-                            <div className={'col-2'}>
-                                {player.goals.length}
-                            </div>
-                            <div className={'col-2'}>
-                                {player.games.length}
-                            </div>
-                            <div className={'col-2'}>
-                                {player.avg_goals.toFixed(2)}
-                            </div>
-                        </div>
-                    ))
-                }
+                <footer>
+                    <h2>Games</h2>
+                    <ul>
+                        {games.map((game, gameIndex) => <li>
+                            <a href={route('game.show', [game.id])}>
+                                {game.place}
+                            </a>
+                            <small>{game.date}</small>
+                        </li>)}
+                    </ul>
+                </footer>
             </article>
         </Layout>
     )

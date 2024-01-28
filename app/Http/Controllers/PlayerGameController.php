@@ -31,32 +31,25 @@ class PlayerGameController extends Controller
             $avg_goals = $player->goals->count() / $player->games->count();
             $player->avg_goals = $avg_goals;
         }
+
         // Sort players by average goals per game.
         $players = $players->sortByDesc('avg_goals');
+
         // Assign players to teams.
         $turn = 2;
-        for($i = 0; $i < count($players); $i++) {
-            if ($i === 0) {
-                $this->playerGame->where(['player_id'=>$players[$i]->id, 'game_id'=>$id])->update(['team_id' => 1]);
-                $turn = 2;
-                continue;
-            }
-            if($i+1 === count($players)) {
-                $this->playerGame->where(['player_id'=>$players[$i]->id, 'game_id'=>$id])->update(['team_id' => 2]);
-                break;
+        $i = 1;
+        foreach ($players as $player) {
+            if($i === 0) {
+                $this->playerGame->where(['player_id'=>$player->id, 'game_id'=>$id])->update(['team_id' => 1]);
             }
 
-            if ($turn === 2) {
-                $this->playerGame->where(['player_id'=>$players[$i]->id, 'game_id'=>$id])->update(['team_id' => 2]);
-                $i++;
-                $this->playerGame->where(['player_id'=>$players[$i]->id, 'game_id'=>$id])->update(['team_id' => 2]);
-                $turn = 1;
+            if ($i % 2 === 0) {
+                $this->playerGame->where(['player_id'=>$player->id, 'game_id'=>$id])->update(['team_id' => $turn]);
             } else {
-                $this->playerGame->where(['player_id'=>$players[$i]->id, 'game_id'=>$id])->update(['team_id' => 1]);
-                $i++;
-                $this->playerGame->where(['player_id'=>$players[$i]->id, 'game_id'=>$id])->update(['team_id' => 1]);
-                $turn = 2;
+                $this->playerGame->where(['player_id'=>$player->id, 'game_id'=>$id])->update(['team_id' => $turn]);
+                $turn = $turn === 1 ? 2 : 1;
             }
+            $i++;
         }
 
         return redirect()->route('game.show', ['id' => $id]);

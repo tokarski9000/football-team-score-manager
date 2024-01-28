@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\Player;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PlayerController extends Controller
 {
-    public function __construct(protected Player $player)
+    public function __construct(protected Player $player, protected Game $game)
     {
     }
 
@@ -58,9 +59,21 @@ class PlayerController extends Controller
         return Inertia::render('Player/store');
     }
 
-    public function show()
+    public function show($id)
     {
-        return Inertia::render('Player/show');
+        $player = $this->player->with('goals', 'games')->where('id', $id)->firstOrFail();
+        $gamesIds = [];
+        foreach ($player->games as $game) {
+            $gamesIds[] = $game->game_id;
+        }
+        $games = $this->game->whereIn('id', $gamesIds)->get();
+
+        return Inertia::render('Player/show',
+            [
+                'player' => $player,
+                'games' => $games,
+            ]
+        );
     }
 
     public function edit()
@@ -68,9 +81,21 @@ class PlayerController extends Controller
         return Inertia::render('Player/edit');
     }
 
-    public function update()
+    public function update(Request $request, $id)
     {
-        return Inertia::render('Player/update');
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'nick_name' => 'required',
+        ]);
+
+        $this->player->where('id', $id)->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'nick_name' => $request->nick_name,
+        ]);
+
+        return $this->show($id);
     }
 
     public function destroy()
