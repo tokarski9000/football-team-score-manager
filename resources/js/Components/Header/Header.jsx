@@ -46,6 +46,11 @@ export default function Header() {
                 :
                 (<>
                     <li>
+                        <Link href={route('player.index')}>
+                            Players
+                        </Link>
+                    </li>
+                    <li>
                         <Link href={route('login')}>
                             Log in
                         </Link>

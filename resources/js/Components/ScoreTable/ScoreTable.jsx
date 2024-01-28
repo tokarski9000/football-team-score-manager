@@ -8,7 +8,6 @@ import AddDeleteGoalForm from "@/Components/ScoreTable/AddDeleteGoalForm.jsx";
 export default function ScoreTable({ team }) {
     const auth = useContext(AuthContext);
 
-    console.log('team0', team)
     return (
         <div className={`${style.ScoreTable}`}>
             <div className={`row border-bottom pb-2`}>

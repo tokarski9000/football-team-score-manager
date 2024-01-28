@@ -87,7 +87,7 @@ class GameController extends Controller
     public function editGameForm($id) {
 
         return Inertia::render('Game/edit', [
-            'game' => $this->game->where('id', $id)->first(),
+            'game' => $this->game->where('id', $id)->with('players')->first(),
             'players' => $this->player->get()
         ]);
     }

@@ -44,6 +44,10 @@ $utilities: map-merge(
 
 @import "bootstrap/scss/utilities/api";
 
+h2 {
+    --typography-spacing-vertical: 1.5rem;
+}
+
 .row {
     --bs-gutter-x: 0;
 }

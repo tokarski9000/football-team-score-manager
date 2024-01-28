@@ -14,15 +14,20 @@ export default function edit({auth, game, players}) {
 
     const playerHandler = (e) => {
         if(e.target.checked) {
-            setPlayersArray( [...playersArray, e.target.value])
+            setPlayersArray( [...playersArray, parseInt(e.target.value)])
         } else {
-            setPlayersArray(playersArray.filter(player => player !== e.target.value));
+            setPlayersArray(playersArray.filter(player => player !== parseInt(e.target.value)));
         }
     }
+    const participatingPlayers = game.players.map(player => player.id);
 
     useEffect(() => {
         setData('players', playersArray);
     }, [playersArray]);
+
+    useEffect(() => {
+        setPlayersArray([...participatingPlayers]);
+    }, []);
 
     const submit = (e) => {
         e.preventDefault();
@@ -68,6 +73,7 @@ export default function edit({auth, game, players}) {
                         onChange={playerHandler}
                         autoComplete="date"
                         aria-invalid={errors.players ? true : null}
+                        defaultChecked={participatingPlayers.includes(player.id)}
                     />
                     {player.first_name} {player.last_name}
                 </label>

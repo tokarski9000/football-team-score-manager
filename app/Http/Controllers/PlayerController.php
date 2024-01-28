@@ -46,12 +46,7 @@ class PlayerController extends Controller
             'nick_name' => $request->nick_name,
         ]);
 
-        $players = $this->player->orderBy('id', 'desc')->get();
-
-        return Inertia::render('Player/index',
-            [
-                'players' => $players,
-            ]);
+        return $this->index();
     }
 
     public function store()

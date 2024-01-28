@@ -1,14 +1,14 @@
-import React, {createContext} from "react";
+import React, {createContext, useContext} from "react";
 import styles from './Game.module.scss';
 import ScoreTable from "@/Components/ScoreTable/ScoreTable.jsx";
 import NoTeamList from "@/Components/NoTeamList/NoTeamList.jsx";
-import EditButtons from "@/Components/Game/EditButtons.jsx";
-import Modal from "@/Elements/Modal/Modal.jsx";
+import { AuthContext } from "@/Layouts/Layout";
 
 export const GameContext = createContext({game: null });
 
 export default function Game({ game }) {
 
+    const auth = useContext(AuthContext);
     const team1 = game.players.filter(player => player.team_id === 1);
     const team2 = game.players.filter(player => player.team_id === 2);
     const noTeam = game.players.filter(player => player.team_id === null);
@@ -20,7 +20,11 @@ export default function Game({ game }) {
                     <a href={route('game.show', [game.id])}>
                         <h2>{game.score[1]} - {game.score[2]}</h2>
                     </a>
-                    <h3>{game.place}</h3>
+                    <h3>
+                        <a href={route('game.show', [game.id])}>
+                            {game.place}
+                        </a>
+                    </h3>
                     <small>{game.date}</small>
                 </div>
                 <div className={'col-12 col-lg-9'}>
@@ -37,13 +41,15 @@ export default function Game({ game }) {
                             <ScoreTable team={team2}/>
                         </div>
                     </div>
-                    <div
-                        className={'mt-5 row justify-content-center justify-content-lg-end gap-4'}>
-                        <a href={route('game.show', [game.id])}
-                           className={'col-5 col-lg-2'}>
-                            <button>Edit</button>
-                        </a>
-                    </div>
+                    {auth.user && (
+                        <div
+                            className={'mt-5 row justify-content-center justify-content-lg-end gap-4'}>
+                            <a href={route('game.show', [game.id])}
+                            className={'col-5 col-lg-2'}>
+                                <button>Edit</button>
+                            </a>
+                        </div>
+                    )}
                 </div>
             </article>
         </GameContext.Provider>

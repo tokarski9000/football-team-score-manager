@@ -19,6 +19,7 @@ export default function Show({auth, player, games}) {
         <Layout auth={auth}>
             <article>
                 <header>{player.first_name} {player.last_name}</header>
+            
                 <form onSubmit={updatePlayer}>
                     <label>
                         <input
@@ -63,14 +64,23 @@ export default function Show({auth, player, games}) {
                 </form>
                 <footer>
                     <h2>Games</h2>
-                    <ul>
-                        {games.map((game, gameIndex) => <li>
-                            <a href={route('game.show', [game.id])}>
-                                {game.place}
-                            </a>
-                            <small>{game.date}</small>
-                        </li>)}
-                    </ul>
+                    <div>
+                        <div className={'row'}>
+                            <div className={'col-6'}><b>Game</b></div>
+                            <div className={'col-6'}><b>Date</b></div>
+                        </div>
+                        {games.map((game, gameIndex) =>
+                            <div className={'row mb-2'}>
+                                <div className={'col-6'}>
+                                    <a href={route('game.show', [game.id])}>
+                                        {game.place}
+                                    </a>
+                                </div>
+                                <div className={'col-6'}>
+                                    <small> {game.date}</small>
+                                </div>
+                            </div>)}
+                    </div>
                 </footer>
             </article>
         </Layout>
