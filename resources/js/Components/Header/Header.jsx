@@ -1,6 +1,7 @@
 import { Link, useForm } from "@inertiajs/react";
 import {useContext} from "react";
 import {AuthContext} from "@/Layouts/Layout.jsx";
+import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 
 export default function Header() {
     const { post } = useForm();
@@ -16,15 +17,18 @@ export default function Header() {
         <nav>
         <ul>
             <li>
-                <strong>
-                    <Link href={route('home')}>Piłka</Link>
-                </strong>
+                <ApplicationLogo />
             </li>
         </ul>
         <ul>
             {auth.user ?
             (
                 <>
+                    <li>
+                        <Link href={route('home')}>
+                            Games
+                        </Link>
+                    </li>
                     <li>
                         <Link href={route('player.index')}>
                             Players
@@ -45,6 +49,12 @@ export default function Header() {
             )
                 :
                 (<>
+
+                    <li>
+                        <Link href={route('home')}>
+                            Games
+                        </Link>
+                    </li>
                     <li>
                         <Link href={route('player.index')}>
                             Players
