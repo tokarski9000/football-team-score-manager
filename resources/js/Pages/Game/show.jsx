@@ -1,36 +1,35 @@
-import Layout from "@/Layouts/Layout.jsx";
-import {useForm} from "@inertiajs/react";
-import GameEdit from "@/Components/Game/GameEdit.jsx";
-import {useEffect, useState} from "react";
+import { useForm } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
+import Layout from '@/Layouts/Layout.jsx';
+import GameEdit from '@/Components/Game/GameEdit.jsx';
 
 export default function create({ auth, game }) {
-    const [playersArray, setPlayersArray] = useState([]);
-    const { data, setData, post, processing, errors, reset } = useForm({
-        place:"",
-        date:"",
-        players: [],
-    });
+  const [playersArray, setPlayersArray] = useState([]);
+  const {
+    data, setData, post, processing, errors, reset,
+  } = useForm({
+    place: '',
+    date: '',
+    players: [],
+  });
 
+  useEffect(() => {
+    setData('players', playersArray);
+  }, [playersArray]);
 
-    useEffect(() => {
-        setData('players', playersArray);
-    }, [playersArray]);
-
-    if (!game) {
-        return (
-            <Layout auth={auth}>
-                <h2>No game found</h2>
-            </Layout>
-            )
-    }
-
+  if (!game) {
     return (
-        <Layout auth={auth}>
-            <div className={`container`}>
-            { auth.user &&
-               <GameEdit game={game} />
-            }
-            </div>
-        </Layout>
+      <Layout auth={auth}>
+        <h2>No game found</h2>
+      </Layout>
     );
+  }
+
+  return (
+    <Layout auth={auth}>
+      <div className="container">
+        { auth.user ? <GameEdit game={game} /> : null}
+      </div>
+    </Layout>
+  );
 }

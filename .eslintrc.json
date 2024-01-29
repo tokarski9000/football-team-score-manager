@@ -1,0 +1,16 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "plugins": [
+        "react"
+    ],
+    "extends": ["eslint:all", "plugin:react/all", "airbnb"],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+    }
+}
