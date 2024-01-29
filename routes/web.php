@@ -42,6 +42,7 @@ Route::post('/game/{id}/addGoal',[GoalController::class, 'create'])->middleware(
 
 Route::post('/game/{id}/createTeam', [PlayerGameController::class, 'create'])->middleware(['auth', 'verified'])->name('playerGame.create');
 Route::patch('/game/{id}/resetTeam', [PlayerGameController::class, 'reset'])->middleware(['auth', 'verified'])->name('playerGame.reset');
+Route::patch('/game/{id}/changeTeam', [PlayerGameController::class, 'changeTeam'])->middleware(['auth', 'verified'])->name('playerGame.changeTeam');
 
 Route::get('/players', [PlayerController::class, 'index'])->name('player.index');
 Route::post('/players', [PlayerController::class, 'create'])->middleware(['auth', 'verified'])->name('player.create');

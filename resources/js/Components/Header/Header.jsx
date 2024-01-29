@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <div>
       <nav>
-        <ul>
+        <ul className={'ms-0'}>
           <li>
             <ApplicationLogo />
           </li>

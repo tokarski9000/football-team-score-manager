@@ -55,12 +55,21 @@ class PlayerGameController extends Controller
         return redirect()->route('game.show', ['id' => $id]);
     }
 
-    public function reset(Request $request, $id)
+    public function reset($id)
     {
         $playerGames = $this->playerGame->where('game_id', $id)->get();
         foreach ($playerGames as $player) {
             $this->playerGame->where('id', $player->id)->update(['team_id' => null]);
         }
+
+        return redirect()->route('game.show', ['id' => $id]);
+    }
+
+    public function changeTeam(Request $request, $id)
+    {
+        $player = $this->playerGame->where(['player_id'=>$request->player_id, 'game_id'=>$id])->first();
+        $team = $player->team_id == 1 ? 2 : 1;
+        $this->playerGame->where(['player_id'=>$request->player_id, 'game_id'=>$id])->update(['team_id' => $team]);
 
         return redirect()->route('game.show', ['id' => $id]);
     }

@@ -53,7 +53,7 @@ export default function edit({ auth, game, players }) {
           />
           <InputError>{errors.place}</InputError>
         </label>
-        <label>
+        <label className={'mb-4'}>
           <input
             id="date"
             type="date"
@@ -85,9 +85,13 @@ export default function edit({ auth, game, players }) {
           </label>
         ))}
         <InputError>{errors.players}</InputError>
-        <button type="submit">Submit</button>
+        <button className={'mt-4'} type="submit">Submit</button>
       </form>
-
+      <a
+        className={'text-decoration-none'}
+        href={route('game.show', [game.id])}>
+        <button className={'bg-secondary'}>Back</button>
+      </a>
     </Layout>
   );
 }

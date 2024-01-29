@@ -14,7 +14,7 @@ export default function GameEdit({ game }) {
   return (
     <GameEditContext.Provider value={game}>
       <article className={`${styles.Game} row`}>
-        <div className="col-12 col-lg-3 mb-3 text-center text-lg-start">
+        <div className="col-12 mb-5 text-center">
           <a href={route('game.show', [game.id])}>
             <h2>
               {game.score[1]}
@@ -27,17 +27,18 @@ export default function GameEdit({ game }) {
           <h3>{game.place}</h3>
           <small>{game.date}</small>
         </div>
-        <div className="col-12 col-lg-9">
+        <div className="col-12">
           <div className={`${styles.Table} row`}>
             {noTeam.length >= 1 && (
             <div className="mb-3">
               <NoTeamList players={noTeam} />
             </div>
             )}
-            <div className="col-12 col-lg-6">
+            <div className="col-12 col-lg-5">
               <ScoreTableEdit team={team1} />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="mb-5 mb-lg-0 col-lg-1 mx-4"></div>
+            <div className="col-12 col-lg-5">
               <ScoreTableEdit team={team2} />
             </div>
           </div>

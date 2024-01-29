@@ -1,11 +1,19 @@
 .ScoreTable {
+  h5 {
     svg {
-        width: 30px;
-        height: 30px;
+      width: 30px;
+      height: 30px;
     }
+  }
 
-    .Player {
-        height: 70px !important;
-        --bs-border-color: #4b5563;
+  button {
+    svg {
+      width: 15px;
+      height: 15px;
     }
+  }
+  .Player {
+      height: 70px !important;
+      --bs-border-color: #4b5563;
+  }
 }

@@ -1,6 +1,5 @@
 import { useForm } from '@inertiajs/react';
 import { useContext } from 'react';
-import style from './AddDeleteGoalForm.module.scss';
 import { GameEditContext } from '@/Components/Game/GameEdit.jsx';
 
 export default function AddDeleteGoalForm({ player }) {
@@ -21,13 +20,13 @@ export default function AddDeleteGoalForm({ player }) {
     }]));
   };
 
-  const form = (actionFunc, actionText) => (
+  const form = (actionFunc, actionText, bgColor) => (
     <form
       onSubmit={(e) => actionFunc(e, player.id)}
-      className={`${style.AddDeleteGoalForm} mb-0 text-center`}
+      className={`mb-0 text-center`}
     >
       <button
-        className="d-flex justify-content-center align-items-center mt-0 mb-0 p-0 mx-auto"
+        className={`${bgColor} border-0 d-flex justify-content-center align-items-center mt-0 mb-0 p-0 mx-auto`}
         type="submit"
       >
         {actionText}
@@ -38,13 +37,13 @@ export default function AddDeleteGoalForm({ player }) {
   return (
     <div className="row w-100 align-items-center pe-2">
       <span className="col-3 text-center">
-        {player.goals > 0 && form(deleteGoal, '-') }
+        {player.goals > 0 && form(deleteGoal, '-', 'bg-danger') }
       </span>
       <span className="col-6 text-center mx-auto">
         {player.goals}
       </span>
       <span className="col-3 text-center">
-        {form(addGoal, '+')}
+        {form(addGoal, '+', 'bg-success')}
       </span>
     </div>
   );
