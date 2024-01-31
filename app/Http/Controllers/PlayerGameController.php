@@ -68,7 +68,7 @@ class PlayerGameController extends Controller
     public function changeTeam(Request $request, $id)
     {
         $player = $this->playerGame->where(['player_id'=>$request->player_id, 'game_id'=>$id])->first();
-        $team = $player->team_id == 1 ? 2 : 1;
+        $team = intval($player->team_id) == 1 ? 2 : 1;
         $this->playerGame->where(['player_id'=>$request->player_id, 'game_id'=>$id])->update(['team_id' => $team]);
 
         return redirect()->route('game.show', ['id' => $id]);

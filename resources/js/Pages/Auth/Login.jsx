@@ -70,7 +70,7 @@ export default function Login({ status, canResetPassword }) {
         </div>
 
         <div>
-          {canResetPassword ? (
+          {canResetPassword === false /* @todo */ ? (
             <p>
               <Link
                 href={route('password.request')}
