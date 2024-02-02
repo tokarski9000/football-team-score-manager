@@ -25,7 +25,7 @@ export default function GameEdit({ game }) {
             </h2>
           </a>
           <h3>{game.place}</h3>
-          <small>{game.date}</small>
+          <small>{game.date_time}</small>
         </div>
         <div className="col-12">
           <div className={`${styles.Table} row`}>

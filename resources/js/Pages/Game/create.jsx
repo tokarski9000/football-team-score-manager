@@ -10,7 +10,7 @@ export default function create({ auth, players }) {
     data, setData, post, processing, errors, reset,
   } = useForm({
     place: '',
-    date: '',
+    dateTime: '',
     players: [],
   });
 
@@ -52,16 +52,16 @@ export default function create({ auth, players }) {
             </label>
             <label>
               <input
-                id="date"
-                type="date"
-                name="date"
-                value={data.date}
+                id="dateTime"
+                type="datetime-local"
+                name="dateTime"
+                value={data.dateTime}
                 placeholder="Date"
-                autoComplete="date"
-                onChange={(e) => setData('date', e.target.value)}
-                aria-invalid={errors.date ? true : null}
+                autoComplete="dateTime"
+                onChange={(e) => setData('dateTime', e.target.value)}
+                aria-invalid={errors.dateTime ? true : null}
               />
-              <InputError>{errors.date}</InputError>
+              <InputError>{errors.dateTime}</InputError>
             </label>
 
             { players.map((player, index) => (
@@ -72,7 +72,7 @@ export default function create({ auth, players }) {
                   name={`player-${index}`}
                   value={player.id}
                   placeholder="Date"
-                  autoComplete="date"
+                  autoComplete="dateTime"
                   onChange={playerHandler}
                   aria-invalid={errors.players ? true : null}
                 />

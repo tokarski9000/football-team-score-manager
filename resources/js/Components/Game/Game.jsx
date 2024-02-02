@@ -30,7 +30,7 @@ export default function Game({ game }) {
               {game.place}
             </a>
           </h3>
-          <small>{game.date}</small>
+          <small>{game.date_time}</small>
         </div>
         <div className="col-12 col-lg-9">
           <div className={`${styles.Table} row`}>

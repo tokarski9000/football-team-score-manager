@@ -16,7 +16,7 @@ class Game extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'date',
+        'date_time',
         'place',
         'finished',
     ];

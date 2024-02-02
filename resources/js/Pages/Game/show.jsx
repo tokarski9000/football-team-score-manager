@@ -9,7 +9,7 @@ export default function create({ auth, game }) {
     data, setData, post, processing, errors, reset,
   } = useForm({
     place: '',
-    date: '',
+    dateTime: '',
     players: [],
   });
 

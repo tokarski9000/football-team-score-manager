@@ -18,13 +18,13 @@ class GameController extends Controller
     public function create(Request $request)
     {
         $validate = $request->validate([
-            'date' => ['required', 'date'],
+            'dateTime' => ['required', 'date'],
             'place' => 'required',
             'players' => ['required', 'min:2']
         ]);
 
         $game = $this->game->create([
-            'date' => $request->date,
+            'date_time' => $request->dateTime,
             'place' => $request->place,
         ]);
 

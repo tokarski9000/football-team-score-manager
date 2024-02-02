@@ -6,23 +6,26 @@ export default function AddDeleteGoalForm({ player }) {
   const { post } = useForm();
   const game = useContext(GameEditContext);
 
-  const addGoal = (e, player_id) => {
+  const handleGoal = (e, player_id, method) => {
     e.preventDefault();
-    post(route('goal.create', [game.id, {
-      player_id,
-    }]));
+    post(
+      route(`goal.${method}`, [game.id, { player_id }]),
+      {
+        onSuccess: () => {
+          const element = document.getElementById(`player-${player_id}-add-goal`);
+          element.scrollIntoView({
+            block: "center",
+            behavior: "instant"
+          });
+        },
+      }
+    );
   };
 
-  const deleteGoal = (e, player_id) => {
-    e.preventDefault();
-    post(route('goal.destroy', [game.id, {
-      player_id,
-    }]));
-  };
-
-  const form = (actionFunc, actionText, bgColor) => (
+  const form = (actionFunc, actionText, bgColor, method) => (
     <form
-      onSubmit={(e) => actionFunc(e, player.id)}
+      id={`player-${player.id}-add-goal`}
+      onSubmit={(e) => actionFunc(e, player.id, method)}
       className={`mb-0 text-center`}
     >
       <button
@@ -37,13 +40,13 @@ export default function AddDeleteGoalForm({ player }) {
   return (
     <div className="row w-100 align-items-center pe-2">
       <span className="col-3 text-center">
-        {player.goals > 0 && form(deleteGoal, '-', 'bg-danger') }
+        {player.goals > 0 && form(handleGoal, '-', 'bg-danger', 'destroy') }
       </span>
       <span className="col-6 text-center mx-auto">
         {player.goals}
       </span>
       <span className="col-3 text-center">
-        {form(addGoal, '+', 'bg-success')}
+        {form(handleGoal, '+', 'bg-success', 'create')}
       </span>
     </div>
   );
