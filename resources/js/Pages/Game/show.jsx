@@ -27,9 +27,7 @@ export default function create({ auth, game }) {
 
   return (
     <Layout auth={auth}>
-      <div className="container">
-        { auth.user ? <GameEdit game={game} /> : null}
-      </div>
+      { auth.user ? <GameEdit game={game} /> : null}
     </Layout>
   );
 }

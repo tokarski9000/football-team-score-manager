@@ -1,27 +1,33 @@
-import React, { createContext } from 'react';
+import React, {createContext, useState} from 'react';
 import styles from './Game.module.scss';
 import NoTeamList from '@/Components/NoTeamList/NoTeamList.jsx';
 import EditButtons from '@/Components/Game/EditButtons.jsx';
 import ScoreTableEdit from '@/Components/ScoreTable/ScoreTableEdit.jsx';
 
-export const GameEditContext = createContext({ game: null });
+export const GameEditContext = createContext({
+  gameContext: null,
+  setGameContext: () => {},
+});
 
 export default function GameEdit({ game }) {
+  const [gameContext, setGameContext] = useState(game);
+  const gameContextProvider = { gameContext, setGameContext};
+
   const team1 = game.players.filter((player) => player.team_id === 1);
   const team2 = game.players.filter((player) => player.team_id === 2);
   const noTeam = game.players.filter((player) => player.team_id === null);
 
   return (
-    <GameEditContext.Provider value={game}>
+    <GameEditContext.Provider value={gameContextProvider}>
       <article className={`${styles.Game} row`}>
         <div className="col-12 mb-5 text-center">
           <a href={route('game.show', [game.id])}>
             <h2>
-              {game.score[1]}
+              {gameContext.score[1]}
               {' '}
               -
               {' '}
-              {game.score[2]}
+              {gameContext.score[2]}
             </h2>
           </a>
           <h3>{game.place}</h3>

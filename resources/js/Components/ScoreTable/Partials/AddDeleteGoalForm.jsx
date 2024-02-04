@@ -1,25 +1,39 @@
-import { useForm } from '@inertiajs/react';
-import { useContext } from 'react';
+import {useContext, useState} from 'react';
 import { GameEditContext } from '@/Components/Game/GameEdit.jsx';
+import axios from "axios";
+import Loading from "@/Elements/Loading/Loading.jsx";
 
 export default function AddDeleteGoalForm({ player }) {
-  const { post } = useForm();
-  const game = useContext(GameEditContext);
+  const { gameContext,setGameContext } = useContext(GameEditContext);
+  const [ goals, setGoals ] = useState(player.goals);
+  const [ disabled, setDisabled ] = useState(false);
 
   const handleGoal = (e, player_id, method) => {
     e.preventDefault();
-    post(
-      route(`goal.${method}`, [game.id, { player_id }]),
-      {
-        onSuccess: () => {
-          const element = document.getElementById(`player-${player_id}-add-goal`);
-          element.scrollIntoView({
-            block: "center",
-            behavior: "instant"
-          });
-        },
+    if(disabled === true) return;
+
+    setDisabled(true);
+
+    axios.post(route(`goal.${method}`, [gameContext.id, { player_id }])).then(() => {
+      if (method === 'create') {
+        setGoals(goals + 1);
+        setGameContext((prev) => {
+          const updatedGame = {...prev};
+          updatedGame.score[player.team_id]++;
+
+          return updatedGame;
+        })
+      } else {
+        setGoals(goals - 1);
+        setGameContext((prev) => {
+          const updatedGame = {...prev};
+          updatedGame.score[player.team_id]--;
+
+          return updatedGame;
+        })
       }
-    );
+      setDisabled(false);
+    });
   };
 
   const form = (actionFunc, actionText, bgColor, method) => (
@@ -29,10 +43,13 @@ export default function AddDeleteGoalForm({ player }) {
       className={`mb-0 text-center`}
     >
       <button
+        disabled={disabled}
         className={`${bgColor} border-0 d-flex justify-content-center align-items-center mt-0 mb-0 p-0 mx-auto`}
         type="submit"
       >
-        {actionText}
+        {
+          disabled ? <Loading /> : actionText
+        }
       </button>
     </form>
   );
@@ -40,10 +57,10 @@ export default function AddDeleteGoalForm({ player }) {
   return (
     <div className="row w-100 align-items-center pe-2">
       <span className="col-3 text-center">
-        {player.goals > 0 && form(handleGoal, '-', 'bg-danger', 'destroy') }
+        {goals > 0 && form(handleGoal, '-', 'bg-danger', 'destroy') }
       </span>
       <span className="col-6 text-center mx-auto">
-        {player.goals}
+        {goals}
       </span>
       <span className="col-3 text-center">
         {form(handleGoal, '+', 'bg-success', 'create')}

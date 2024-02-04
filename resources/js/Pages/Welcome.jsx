@@ -7,11 +7,9 @@ export default function Welcome({ auth, games }) {
   return (
     <Layout auth={auth}>
       <Head title="Podwórkowa liga szóstek" />
-      <div className="container">
-        { games.map((game, gameIndex) => (
-          <Game key={gameIndex} game={game} />
-        ))}
-      </div>
+      { games.map((game, gameIndex) => (
+        <Game key={gameIndex} game={game} />
+      ))}
     </Layout>
   );
 }

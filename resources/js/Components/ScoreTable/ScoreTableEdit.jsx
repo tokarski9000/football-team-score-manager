@@ -32,8 +32,8 @@ export default function ScoreTableEdit({ team }) {
               </div>
               <div className="d-flex justify-content-end justify-content-sm-center align-items-center col-5">
                 {
-                          auth.user ? <AddDeleteGoalForm player={player} /> : <>{player.goals}</>
-                      }
+                  auth.user ? <AddDeleteGoalForm player={player} /> : <>{player.goals}</>
+                }
               </div>
             </div>
           ))

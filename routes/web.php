@@ -32,7 +32,7 @@ Route::get('/game/{id}/editGame', [GameController::class, 'editGameForm'])->midd
 Route::patch('/game/{id}/editGame', [GameController::class, 'editGame'])->middleware(['auth', 'verified'])->name('game.edit');
 
 Route::post('/game/{id}/deleteGoal',[GoalController::class, 'destroy'])->middleware(['auth', 'verified'])->name('goal.destroy');
-Route::post('/game/{id}/addGoal',[GoalController::class, 'create'])->middleware(['auth', 'verified'])->name('goal.create');
+Route::post('/game/{id}/',[GoalController::class, 'create'])->middleware(['auth', 'verified'])->name('goal.create');
 
 Route::post('/game/{id}/createTeam', [PlayerGameController::class, 'create'])->middleware(['auth', 'verified'])->name('playerGame.create');
 Route::patch('/game/{id}/resetTeam', [PlayerGameController::class, 'reset'])->middleware(['auth', 'verified'])->name('playerGame.reset');

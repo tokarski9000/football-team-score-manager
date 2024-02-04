@@ -4,13 +4,9 @@ import { AuthContext } from '@/Layouts/Layout.jsx';
 import ApplicationLogo from '@/Components/ApplicationLogo.jsx';
 
 export default function Header() {
-  const { post } = useForm();
 
   const auth = useContext(AuthContext);
-  const logout = (e) => {
-    e.preventDefault();
-    post(route('logout'));
-  };
+
 
   return (
     <div>
@@ -40,12 +36,7 @@ export default function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={route('dashboard')}
-                    onClick={logout}
-                  >
-                    Logout
-                  </Link>
+
                 </li>
               </>
             )

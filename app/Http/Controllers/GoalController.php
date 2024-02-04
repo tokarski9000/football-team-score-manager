@@ -27,8 +27,6 @@ class GoalController extends Controller
             'player_id' => $request->player_id,
             'game_id' => $id,
         ]);
-
-        return redirect()->route('game.show', ['id' => $id]);
     }
 
     /**
