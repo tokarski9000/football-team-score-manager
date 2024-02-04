@@ -20,7 +20,7 @@ export default function Footer() {
         </div>
         <div>
           {auth.user && <Link
-            href={route('dashboard')}
+            href={route('home')}
             onClick={logout}
           >
             Logout

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import {createContext, useContext, useState} from 'react';
 import style from './ScoreTable.module.scss';
 import PlayerIcon from '@/Components/Icons/PlayerIcon.jsx';
 import BallIcon from '@/Components/Icons/BallIcon.jsx';
@@ -7,6 +7,8 @@ import ChangeTeamForm
   from "@/Components/ScoreTable/Partials/ChangeTeamForm.jsx";
 import AddDeleteGoalForm
   from "@/Components/ScoreTable/Partials/AddDeleteGoalForm.jsx";
+
+
 
 export default function ScoreTableEdit({ team }) {
   const auth = useContext(AuthContext);

@@ -1,18 +1,21 @@
 import {useContext, useState} from 'react';
-import { GameEditContext } from '@/Components/Game/GameEdit.jsx';
+import {
+  GameEditContext,
+  LoadingStateContext
+} from '@/Components/Game/GameEdit.jsx';
 import axios from "axios";
 import Loading from "@/Elements/Loading/Loading.jsx";
 
 export default function AddDeleteGoalForm({ player }) {
   const { gameContext,setGameContext } = useContext(GameEditContext);
+  const { loading, setLoading } = useContext(LoadingStateContext);
   const [ goals, setGoals ] = useState(player.goals);
-  const [ disabled, setDisabled ] = useState(false);
 
   const handleGoal = (e, player_id, method) => {
     e.preventDefault();
-    if(disabled === true) return;
+    if(loading === true) return;
 
-    setDisabled(true);
+    setLoading(true);
 
     axios.post(route(`goal.${method}`, [gameContext.id, { player_id }])).then(() => {
       if (method === 'create') {
@@ -32,7 +35,7 @@ export default function AddDeleteGoalForm({ player }) {
           return updatedGame;
         })
       }
-      setDisabled(false);
+      setLoading(false);
     });
   };
 
@@ -43,12 +46,12 @@ export default function AddDeleteGoalForm({ player }) {
       className={`mb-0 text-center`}
     >
       <button
-        disabled={disabled}
+        disabled={loading}
         className={`${bgColor} border-0 d-flex justify-content-center align-items-center mt-0 mb-0 p-0 mx-auto`}
         type="submit"
       >
         {
-          disabled ? <Loading /> : actionText
+          loading ? <Loading /> : actionText
         }
       </button>
     </form>
