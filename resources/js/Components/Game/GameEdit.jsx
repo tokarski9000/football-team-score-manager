@@ -28,7 +28,6 @@ export default function GameEdit({ game }) {
   return (
     <GameEditContext.Provider value={gameContextProvider}>
       <LoadingStateContext.Provider value={loadingContext}>
-
       <article className={`${styles.Game} row`}>
         <div className="col-12 mb-5 text-center">
           <a href={route('game.show', [game.id])}>
