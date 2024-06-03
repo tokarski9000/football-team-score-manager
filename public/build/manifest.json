@@ -13,25 +13,25 @@
     "file": "assets/GameEdit-MKsdp2jm.css",
     "src": "_GameEdit-!~{00c}~.js"
   },
-  "_GameEdit-Ny716PTg.js": {
+  "_GameEdit-dEYFd8ub.js": {
     "css": [
       "assets/GameEdit-MKsdp2jm.css"
     ],
-    "file": "assets/GameEdit-Ny716PTg.js",
+    "file": "assets/GameEdit-dEYFd8ub.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputError-3VFty9qF.js"
+      "_InputError-1Pl3FTFx.js"
     ]
   },
   "_InputError-!~{00a}~.js": {
     "file": "assets/InputError-OJgj8avO.css",
     "src": "_InputError-!~{00a}~.js"
   },
-  "_InputError-3VFty9qF.js": {
+  "_InputError-1Pl3FTFx.js": {
     "css": [
       "assets/InputError-OJgj8avO.css"
     ],
-    "file": "assets/InputError-3VFty9qF.js",
+    "file": "assets/InputError-1Pl3FTFx.js",
     "imports": [
       "resources/js/app.jsx"
     ]
@@ -40,68 +40,68 @@
     "css": [
       "assets/Login-cbaJXXWt.css"
     ],
-    "file": "assets/Login-TBR-AvTJ.js",
+    "file": "assets/Login-Vgdc1GG5.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputError-3VFty9qF.js"
+      "_InputError-1Pl3FTFx.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/Login.jsx"
   },
   "resources/js/Pages/Game/create.jsx": {
-    "file": "assets/create-Mh1gOC7W.js",
+    "file": "assets/create-DXLUS_dW.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputError-3VFty9qF.js",
+      "_InputError-1Pl3FTFx.js",
       "_Game.module-sMobTZcd.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/create.jsx"
   },
   "resources/js/Pages/Game/edit.jsx": {
-    "file": "assets/edit-xO07JS16.js",
+    "file": "assets/edit-kRDSOLh7.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputError-3VFty9qF.js",
+      "_InputError-1Pl3FTFx.js",
       "_Game.module-sMobTZcd.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/edit.jsx"
   },
   "resources/js/Pages/Game/show.jsx": {
-    "file": "assets/show-y0YakOu7.js",
+    "file": "assets/show-SlPTjcCm.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputError-3VFty9qF.js",
-      "_GameEdit-Ny716PTg.js"
+      "_InputError-1Pl3FTFx.js",
+      "_GameEdit-dEYFd8ub.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/show.jsx"
   },
   "resources/js/Pages/Player/index.jsx": {
-    "file": "assets/index-NpIpvDis.js",
+    "file": "assets/index-OyQMKych.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputError-3VFty9qF.js"
+      "_InputError-1Pl3FTFx.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Player/index.jsx"
   },
   "resources/js/Pages/Player/show.jsx": {
-    "file": "assets/show-AhkgYwpH.js",
+    "file": "assets/show-H_ahV8WA.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputError-3VFty9qF.js"
+      "_InputError-1Pl3FTFx.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Player/show.jsx"
   },
   "resources/js/Pages/Welcome.jsx": {
-    "file": "assets/Welcome--0QJemTq.js",
+    "file": "assets/Welcome-s6IXdBIz.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputError-3VFty9qF.js",
-      "_GameEdit-Ny716PTg.js"
+      "_InputError-1Pl3FTFx.js",
+      "_GameEdit-dEYFd8ub.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Welcome.jsx"
@@ -116,7 +116,7 @@
       "resources/js/Pages/Player/show.jsx",
       "resources/js/Pages/Welcome.jsx"
     ],
-    "file": "assets/app-wV0qL3A9.js",
+    "file": "assets/app-fp6qnxH5.js",
     "isEntry": true,
     "src": "resources/js/app.jsx"
   },
