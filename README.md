@@ -1,4 +1,4 @@
-<h1>Pilka menago</h1>
+<h1>Football team score manager</h1>
 
 ## Instalation
 ```
