@@ -13,7 +13,7 @@ export default function NoTeamList({ players }) {
   } = useForm();
   const createTeams = (e) => {
     e.preventDefault();
-    post(route('playerGame.create', [game.gameContext.id, {
+    post(route('playerGame.create', [game?.gameContext?.id, {
       players,
     }]));
   };
@@ -24,13 +24,13 @@ export default function NoTeamList({ players }) {
       <ol>
         {players.map((player, playerIndex) => (
           <li key={playerIndex}>
-            {player.first_name}
+            {player?.first_name}
             {' '}
-            {player.last_name}
+            {player?.last_name}
           </li>
         ))}
       </ol>
-      {(auth.user && game.gameContext.id) ? (
+      {(auth.user && game?.gameContext?.id) ? (
         <form onSubmit={createTeams}>
           <button type="submit" className="btn btn-primary" disabled={processing}>Create Teams</button>
           <InputError>{errors.players}</InputError>
