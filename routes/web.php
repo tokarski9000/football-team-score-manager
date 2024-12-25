@@ -27,7 +27,7 @@ Route::get('/dashboard', function () {
 Route::get('/game', [GameController::class, 'createForm'])->middleware(['auth', 'verified'])->name('game.create');
 Route::get('/game/{id}', [GameController::class, 'show'])->middleware(['auth', 'verified'])->name('game.show');
 Route::post('/game', [GameController::class, 'create'])->middleware(['auth', 'verified'])->name('game.create');
-Route::post('/game/{id}', [GameController::class, 'delete'])->middleware(['auth', 'verified'])->name('game.delete');
+Route::delete('/game/{id}', [GameController::class, 'delete'])->middleware(['auth', 'verified'])->name('game.delete');
 Route::get('/game/{id}/editGame', [GameController::class, 'editGameForm'])->middleware(['auth', 'verified'])->name('game.edit');
 Route::patch('/game/{id}/editGame', [GameController::class, 'editGame'])->middleware(['auth', 'verified'])->name('game.edit');
 

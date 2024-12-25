@@ -8,7 +8,7 @@ export default function EditButtons({ game }) {
 
   const auth = useContext(AuthContext);
 
-  const { post, patch } = useForm();
+  const { patch, submit } = useForm();
 
   const openModal = (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ export default function EditButtons({ game }) {
   };
   const deleteGame = (e) => {
     e.preventDefault();
-    post(route('game.delete', [game.id]));
+    submit('delete', route('game.delete', [game.id]));
     setModalOpen(false);
   };
 
